@@ -1,0 +1,22 @@
+body{
+    width: 100%;
+    text-align: canter;
+}
+
+section {
+    width: 100%;
+}
+
+img {
+    float: left;
+    width: 23%;
+    margin: 5%;
+}
+
+/* header > img { */
+    /* width: 200px;
+}
+
+#choice-field > img {
+    max-width: 300px;
+} */
