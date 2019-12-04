@@ -3,15 +3,15 @@ console.log("proof of life");
 
 // global variables
 var picOne = document.getElementById("pic1");
-var picOne = document.getElementById("pic2");
-var picOne = document.getElementById("pic3");
+var picTwo = document.getElementById("pic2");
+var picThree = document.getElementById("pic3");
 var picArray = [];
 var picvote = document.getElementById('picVote');
 var voteRounds = 25;
 
 // make a constructor
 function image (src, name) {
-    this.src = "../img/${src.jpg";
+    this.src = `../img/${src}.jpg`;
     this.title = name;
     this.alt = name;
     this.viewed = 0;
@@ -39,17 +39,17 @@ function clickVote() {
     if(voteRounds === 0) {
         hide(picVote);
 }
-Voterounds --;
+voteRounds --;
 console.log(voteRounds)
 }
 
 // random number function from MDN
 function randomIndex(max) {
-    return Math.floor(Math.random() * Math.floor max);
+    return Math.floor(Math.random() * Math.floor (max));
 }
 
 function generateImages() {
-    var IndexONE = randomIndex(picArray.length);
+    var indexOne = randomIndex(picArray.length);
 
     picOne.src = picArray[indexOne].src;
     picOne.title = picArray[indexOne].title;
@@ -62,8 +62,8 @@ function generateImages() {
 }
 
 picTwo.src = picArray[indexTwo].src;
-picTwo.title =picArray[indexTwo].title;
-picTwo.alt = picArray[indexTwo.alt];
+picTwo.title = picArray[indexTwo].title;
+picTwo.alt = picArray[indexTwo].alt;
 picArray[indexTwo].viewed ++;
 
 // picIndex.push(indexTwo);
@@ -78,7 +78,7 @@ picThree.src = picArray[indexThree].src
 picArray.title = picArray[indexThree].title
 picThree.alt = picArray[indexThree].alt
 picArray[indexThree].viewed ++;
-console.log(indexOne, indexTwo indexThree);
+console.log(indexOne, indexTwo, indexThree);
 // picIndex.push(indexOne, indexTwo, indexthree);
 }
 
