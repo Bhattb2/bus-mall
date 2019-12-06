@@ -1,5 +1,5 @@
 'use strict';
-console.log("proof of life");
+// console.log("proof of life");
 
 // global variables
 var picOne = document.getElementById("pic1");
@@ -9,7 +9,7 @@ var picArray = [];
 var picvote = document.getElementById('picVote');
 var voteRounds = 25;
 
-// make a constructor
+// make a constructor for images to save in global array
 function image (src, name) {
     this.src = `../img/${src}.jpg`;
     this.title = name;
@@ -82,7 +82,7 @@ console.log(indexOne, indexTwo, indexThree);
 // picIndex.push(indexOne, indexTwo, indexthree);
 }
 
-// create image on page function
+// create image on page function uploads images into one array
 function createOnPage() {
     new image ('bag', 'Bag');
     new image ('banana', 'Banana');
@@ -105,7 +105,14 @@ function createOnPage() {
     new image ('usb', 'USB');
     new image ('water-can', 'Water Can');
     new image ('wine-glass', 'Wine Glass');
+    
 }
+
+
+
+
+
+
 createOnPage();
 generateImages();
 picvote.addEventListener('click',clickVote)
