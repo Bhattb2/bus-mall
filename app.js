@@ -43,9 +43,56 @@ voteRounds --;
 console.log(voteRounds)
 }
 
+// build list and add views & votes
+function analysis() {
+    var results = document.getElementById('list');
+    var ulEl = document.createElement('ul');
+    for(var i = 0; i < picArray.length; i++) {
+        var liEl = document.createElement('li');
+        liEl.textContent = `${picArray[i].title} : ${picArray[i].vote} Votes & ${picArray[i].viewed} views`
+        ulEl.appendChild(liEl);
+    }
+    resultsList.appendChild(ulEl);
+}
+
 // random number function from MDN
 function randomIndex(max) {
     return Math.floor(Math.random() * Math.floor (max));
+}
+
+function generateImages() {
+    var currentImages = [];
+    for(var i = 0; i < pictureContainer.length; i ++) {
+        var currentIndex = randomIndex(picArray.length);
+        while(currentImages.includes(currentIndex)) {
+            currentIndex = randomIndex(picArray.length);
+        }
+        currentImages.push(currentIndex);
+        pictureContainer[i].src = picArray[currentIndex].src;
+        pictureContainer[i].title = picArray[currentIndex].title;
+        pictureContainer[i].alt = picArray[currentIndex].alt
+        picArray[currentIndex].viewed ++;
+    }
+}
+
+function makeAChart() {
+    var ctx = document.getElementById('voteChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+        // The data for our dataset
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45]
+            }]
+        },
+        // options for Configuration are placed here
+        options: {}
+    });
 }
 
 function generateImages() {
