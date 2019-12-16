@@ -8,6 +8,14 @@ var picThree = document.getElementById("pic3");
 var picArray = [];
 var picvote = document.getElementById('picVote');
 var voteRounds = 25;
+var pictureContainer = [picOne, picTwo, picThree];
+// chart data
+var chartContainer = document.getElementById('voteChart');
+// global variables for chart data
+var chartLabels = [];
+var votesArray = [];
+var viewsArray = [];
+var chartColors = [];
 
 // make a constructor for images to save in global array
 function image (src, name) {
@@ -33,14 +41,15 @@ function clickVote() {
             picArray[i].vote ++;
         }
     }
-
+    console.table(picArray);
     generateImages();
     console.table(picArray);
     if(voteRounds === 0) {
         hide(picVote);
-}
-voteRounds --;
-console.log(voteRounds)
+        makeAChart();
+    }
+    voteRounds --;
+    console.log(voteRounds)
 }
 
 // build list and add views & votes
@@ -75,96 +84,122 @@ function generateImages() {
     }
 }
 
+// my chart data
+// push data into arrays and format for use
 function makeAChart() {
+    chartLabels = [];
+    viewsArray = [];
+    votesArray = [];
+    chartColors = ['red', 'blue', 'green', 'orange', 'yellow', 'pink', 'salmon', 'deeppink', 'coral', 'violet', 'purple', 'lime', 'teal', 'darkseagreen','yellowgreen', 'aqua', 'aquamarine', 'powderblue', 'mediumslteblue', 'cornsilk', 'tan', 'rosybrown']
+
+    // push all the data into the arrays
+    for(var i = 0; i < picArray.length; i ++) {
+        chartLabels.push(picArray[i].title);
+        viewsArray.push(picArray[i].viewed);
+        votesArray.push(picArray[i].vote);
+    }
+    for(var j = 0; j < chartColors.length; j ++) {
+        chartColors.push.randomIndex;
+    }
+}
+
+    // global variables for chart arrays
+// create the chart
+function makeAChart() {
+    makeChartData();
     var ctx = document.getElementById('voteChart').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'pie',
+
         // The data for our dataset
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45]
-            }]
+            labels: chartLabels,
+            datasets: [
+                {
+                label: ['Votes'],
+                backgroundColor: chartColors,
+                borderColor: 'darkgrey',
+                data: votesArray
+                },
+                {
+                label: ['Views'],
+                backgroundColor: chartColors,
+                borderColor: 'rgb(34, 212, 40)',
+                data: viewsArray
+                }
+            ]
+
+
         },
-        // options for Configuration are placed here
-        options: {}
-    });
+
+        // Configuration options go here
+        options: {
+            title: {
+            display:true,
+            text: 'Voting results',
+            fontSize:25,
+        },
+    }
+});
 }
+// picOne.src = picArray[indexOne].src;
+    // picOne.title = picArray[indexOne].title;
+    // picOne.alt = picArray[indexOne].alt
+    // picArray[indexOne].viewed ++;
 
-function generateImages() {
-    var indexOne = randomIndex(picArray.length);
+    // var indexTwo = randomIndex(picArray.length);
+    // while(indexTwo === indexOne) {
+        //     indexTwo = randomIndex(picArray.length);
+        // }
 
-    picOne.src = picArray[indexOne].src;
-    picOne.title = picArray[indexOne].title;
-    picOne.alt = picArray[indexOne].alt;
-    picArray[indexOne].viewed ++;
+        // picTwo.src = picArray[indexTwo].src;
+    // picTwo.title = picArray[indexTwo].title;
+    // picTwo.alt = picArray[indexTwo].alt;
+    // picArray[indexTwo].viewed ++;
+    // // picIndex.push(indexTwo);
 
-    var indexTwo = randomIndex(picArray.length);
-    while(indexTwo === indexOne) {
-        indexTwo = randomIndex(picArray.length);
-}
+    // var indexThree = randomIndex(picArray.length);
 
-picTwo.src = picArray[indexTwo].src;
-picTwo.title = picArray[indexTwo].title;
-picTwo.alt = picArray[indexTwo].alt;
-picArray[indexTwo].viewed ++;
+    // while(indexThree === indexTwo || indexThree === indexOne) {
+        //     indexThree = randomIndex(picArray.length);
+        // }
 
-// picIndex.push(indexTwo);
+        // picThree.src = picArray[indexThree].src
+        // picThree.title = picArray[indexThree].title
+        // picThree.alt = picArray[indexThree].alt
+        // picArray[indexThree].viewed ++;
+        // console.log(indexOne, indexTwo, indexThree);
+        // picIndex.push(indexOne, indexTwo, indexThree);
 
-var indexThree = randomIndex(picArray.length);
+        // create image on page function
+        function createOnPage() {
+            new image ('bag', 'Bag');
+            new image ('banana', 'Banana');
+            new image ('boots', 'Boots');
+            new image ('bathroom', 'Bathroom');
+            new image ('boots', 'Boots');
+            new image ('breakfast', 'Breakfast');
+            new image ('bubblegum', 'BubbleGum');
+            new image ('chair', 'Chair');
+            new image ('cthulhu', 'Cthulhu');
+            new image ('dog-duck', 'Dog Duck');
+            new image ('dragon', 'Dragon');
+            new image ('pen', 'Pen');
+            new image ('pet-sweep', 'Pet Sweep');
+            new image ('scissors', 'Scissors');
+            new image ('shark', 'Shark');
+            new image ('sweep', 'Sweep');
+            new image ('tauntaun', 'TaunTaun');
+            new image ('unicorn', 'Unicorn');
+            new image ('usb', 'USB');
+            new image ('water-can', 'Water Can');
+            new image ('wine-glass', 'Wine Glass');
+        }
+        createOnPage();
+        generateImages();
+        console.table(picArray);
+        picVote.addEventListener('click', clickVote)
 
-while(indexThree === indexTwo || indexThree === indexOne) {
-    indexThree = randomIndex(picArray.length);
-}
-
-picThree.src = picArray[indexThree].src
-picArray.title = picArray[indexThree].title
-picThree.alt = picArray[indexThree].alt
-picArray[indexThree].viewed ++;
-console.log(indexOne, indexTwo, indexThree);
-// picIndex.push(indexOne, indexTwo, indexthree);
-}
-
-// create image on page function uploads images into one array
-function createOnPage() {
-    new image ('bag', 'Bag');
-    new image ('banana', 'Banana');
-    new image ('boots', 'Boots');
-    new image ('bathroom', 'Bathroom');
-    new image ('boots', 'Boots');
-    new image ('breakfast', 'Breakfast');
-    new image ('bubblegum', 'BubbleGum');
-    new image ('chair', 'Chair');
-    new image ('cthulhu', 'Cthulhu');
-    new image ('dog-duck', 'Dog Duck');
-    new image ('dragon', 'Dragon');
-    new image ('pen', 'Pen');
-    new image ('pet-sweep', 'Pet Sweep');
-    new image ('scissors', 'Scissors');
-    new image ('shark', 'Shark');
-    new image ('sweep', 'Sweep');
-    new image ('tauntaun', 'TaunTaun');
-    new image ('unicorn', 'Unicorn');
-    new image ('usb', 'USB');
-    new image ('water-can', 'Water Can');
-    new image ('wine-glass', 'Wine Glass');
-    
-}
-
-
-
-
-
-
-createOnPage();
-generateImages();
-picvote.addEventListener('click',clickVote)
-
-// console.log(picIndex);
-console.log(picArray);
-// console.log(Math.random());c
-
+        // console.log(picIndex);
+        // console.log(Math.random());
